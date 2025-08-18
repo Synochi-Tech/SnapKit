@@ -1,19 +1,20 @@
 import { ReactNode } from "react";
 
-interface IContainer {
+interface IContainerProps {
   children: ReactNode;
+  id: string;
+
   className?: string;
-  name: string;
 }
 const Container = ({
   children,
   className = "",
-  name
-}: IContainer) => {
+  id
+}: IContainerProps) => {
   return (
     <div
       className={`max-w-[1400px] mx-auto ${className}`}
-      data-testid={`${name}_container`}
+      data-testid={`${id}_container`}
     >
       {children}
     </div>
