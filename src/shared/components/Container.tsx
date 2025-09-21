@@ -3,17 +3,23 @@ import { ReactNode } from "react";
 interface IContainerProps {
   children: ReactNode;
   id: string;
-
+  mode?: "fixed" | "stretch" | "custom";
   className?: string;
 }
 const Container = ({
   children,
   className = "",
-  id
+  id,
+  mode = "fixed",
 }: IContainerProps) => {
+  const widthConfig = {
+    fixed: "max-w-[1400px]",
+    stretch: "w-full px-4",
+    custom: "",
+  };
   return (
     <div
-      className={`max-w-[1400px] mx-auto ${className}`}
+      className={`${widthConfig[mode]} mx-auto ${className}`}
       data-testid={`${id}_container`}
     >
       {children}

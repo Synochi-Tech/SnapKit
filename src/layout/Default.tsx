@@ -1,13 +1,24 @@
 import { Outlet } from "react-router";
-import Header from "./components/Header";
+import Container from "../shared/components/Container";
+import AsideBar from "./components/AsideBar";
 
 const DefaultLayout = () => {
   return (
-    <div className="wrapper">
-      <Header />
-      <Outlet />
+    <div className="wrapper dark:bg-gray-900 dark:text-white">
+      <main className="h-screen">
+        <Container
+          id="sidebar"
+          className="flex gap-2"
+          mode="stretch"
+        >
+          <AsideBar />
+          <section>
+            <Outlet />
+          </section>
+        </Container>
+      </main>
     </div>
-  )
-}
+  );
+};
 
 export default DefaultLayout;
