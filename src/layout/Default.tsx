@@ -12,7 +12,7 @@ const DefaultLayout = () => {
           mode="stretch"
         >
           <AsideBar />
-          <section>
+          <section className="flex-1">
             <Outlet />
           </section>
         </Container>
