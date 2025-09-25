@@ -8,10 +8,10 @@ import {
 
 interface InlineOverflowListProps<T> {
   /**
-    * Array of items to render
-    * 
-    * This can be string of array or objects
-  */
+   * Array of items to render
+   *
+   * This can be string of array or objects
+   */
   items: T[];
 
   /** Function that renders each item */
@@ -19,7 +19,7 @@ interface InlineOverflowListProps<T> {
 
   /**
    * Renderer for the "Show more" button
-   * 
+   *
    * Provides toggle handler, current state, and remaining count
    */
   showMoreRenderer: (props: {
@@ -36,6 +36,9 @@ interface InlineOverflowListProps<T> {
 
   /** Optional children rendered at the end */
   children?: ReactNode;
+
+  /** Optional maximum number of items to display before overflow */
+  maxItems?: number;
 }
 
 function InlineOverflowList<T>({
@@ -45,13 +48,14 @@ function InlineOverflowList<T>({
   gap = 8,
   buffer = 0,
   children,
+  maxItems,
 }: InlineOverflowListProps<T>) {
   const containerRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const [{ width }] = useMeasure(containerRef);
   const [visibleCount, setVisibleCount] = useState(
-    items.length
+    maxItems ? maxItems : items.length
   );
   const [showAll, setShowAll] = useState(false);
 
@@ -66,6 +70,7 @@ function InlineOverflowList<T>({
       if (el) {
         total += el.offsetWidth + gap;
         if (total > width - (buffer + buttonWidth)) break;
+        if(maxItems && fitCount >= maxItems) break;
         fitCount++;
       }
     }

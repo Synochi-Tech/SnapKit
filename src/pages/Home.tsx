@@ -7,6 +7,7 @@ const HomePage = () => {
     <div className="py-7">
       <InlineOverflowList
         items={users}
+        maxItems={4}
         itemRenderer={(item: IUser) => (
           <div
             className="py-2 px-4 rounded-full bg-white text-black"

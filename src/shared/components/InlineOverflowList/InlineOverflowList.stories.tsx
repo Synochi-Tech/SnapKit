@@ -70,3 +70,36 @@ export const WithChildren: StoryObj<
     ),
   },
 };
+export const withMaxItems: StoryObj<
+  typeof InlineOverflowList
+> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "This will limit the maximum number of items shown even if there is more space available. if space is reduced, it will still adjust accordingly.",
+      },
+    },
+  },
+  args: {
+    items: [...users],
+    maxItems: 4,
+    itemRenderer: (item: any) => (
+      <div className="bg-gray-200 px-3 py-1 rounded-full whitespace-nowrap">
+        {item.firstName} {item.lastName}
+      </div>
+    ),
+    showMoreRenderer: ({
+      onToggleShow,
+      count,
+      showingAll,
+    }) => (
+      <button
+        className="cursor-pointer text-main text-xs"
+        onClick={onToggleShow}
+      >
+        {!showingAll ? `... ${count} more` : "Hide"}
+      </button>
+    ),
+  },
+};
