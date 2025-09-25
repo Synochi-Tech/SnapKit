@@ -9,7 +9,7 @@ const meta: Meta<typeof Container> = {
 
 export default meta;
 
-export const DefaultOrFixedMode: StoryObj<
+export const Default: StoryObj<
   typeof Container
 > = {
   args: {
